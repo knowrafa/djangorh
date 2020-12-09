@@ -18,6 +18,7 @@ class Curriculum(models.Model):
         ("CLT", "CLT"),
         ("PJ", "PJ"),
     ]
+    # Choices dão opções para o usuário escolher ao preencher campos do banco de dados
     cadastro = models.ForeignKey(Cadastro, on_delete=models.DO_NOTHING, related_name='curriculo')
     nome = models.CharField(max_length=255)
     interesess = models.CharField(max_length=255, choices=INTERESSES_CHOICE, default="Estágio")

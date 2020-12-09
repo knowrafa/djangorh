@@ -1,4 +1,4 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 from django.http import HttpResponse, Http404
 # Create your views here.
 
@@ -13,8 +13,9 @@ def error404(request):
 
 
 def cadastrar(request):
-    response = "Tela de cadastro"
-    return render(request, )
+    # response = "Tela de cadastro"
+    context = {"ola_mundo": "Olá mundo do html!"}
+    return render(request, "cadastro/cadastro.html", context)
 
 
 def pesquisarvagas(request):

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *, *:after, *:before {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }<!-- Resetando padrões de padding e margem -->
+        .titulo-1 {
+            color: red;
+            font-size: 50px; <!-- Tamanho da fonte -->
+            text-align: center; <!-- Alinhamento do texto -->
+            font-weight: 300; <!-- Grossura da borda do texto -->
+        }<!-- Alterando estilo da classe (colocar isto no arquivo .css)-->
+        #bloco {
+            height: 300px;
+            width: 300px;
+            border: 1px solid red;
+            margin: 50px;
+            padding-left: 20px;
+        }<!--Estilo único, do tipo id (colocar tambépm no arquivo.css)-->
+        .usuarios {
+            display: flex;
+            flex-direction: column;
+        }<!-- Display do tipo flex (mais utilizado) e direção do tipo coluna (row também disponível)-->
+    </style>
+</head>
+<body>
+    <div class="titulo-1">h1</div> <!--bloco div-->
+    <h2>h2</h2>
+    <h3>h3</h3>
+    <h4>h4</h4>
+    <h5 class="titulo-1">h5</h5>
+    <h6>h6</h6>
+<!--Fontes padrão, h1 é a maior e a h6 é a menor-->
+    <div id="bloco">
+        <p>Isso ai dsai dojs iad josij dosia djosia jdosi ajdois jadoi jsoadi jsoaidjosiadsjoaidjosaidjosia</p>
+    </div>
+
+    <p>Este é um parágrafo.</p>
+
+    <ol>
+        <li>Tomate</li>
+        <li>Alface</li>
+        <li>Beterraba</li>
+    </ol>
+
+    <table>
+        <tr>
+            <td>Divisao 1</td>
+            <td>Divisao 2</td>
+            <td>Divisao 3</td>
+        </tr>
+        <tr>
+            <td>Divisao 1</td>
+            <td>Divisao 2</td>
+        </tr>
+    </table>
+
+    <!-- comentario -->
+    <div>
+        <form method="GET" class="usuarios">
+            <input type="text" placeholder="Digite seu nome irmaozinho" name="login" />
+            <input type="password" placeholder="Digite sua senha brow" name="senha" />
+
+            <div>
+                <button class="">Enviar</button>
+            </div>
+        </form>
+    </div><!-- /usuarios -->
+</body>
+</html>

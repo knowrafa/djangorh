@@ -7,7 +7,6 @@ class Cadastro(models.Model):
     nome = models.CharField(max_length=255)
     email = models.EmailField()
     user = models.ForeignKey(to=User, on_delete=models.DO_NOTHING, related_name="cadastro")
-
     def __str__(self):
         return self.nome
 

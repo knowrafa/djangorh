@@ -17,9 +17,10 @@ from django.urls import path, include
 from . import views
 
 
-app_name = 'cadastro'
+app_name = 'login'
 urlpatterns = [
-    path('', views.cadastrar, name="cadastrar"),
+    path('', views.login, name="tela_inicial"),
+    path('vagas/', views.mostrarvagas, name="mostrar_vagas")
     # path('', include(router.urls)),
     # path("api-auth/", include('rest_framework.urls', namespace='rest_framework'))
     # path('<int:pagina_id>/', views.cadastrar, name="cadastro"),

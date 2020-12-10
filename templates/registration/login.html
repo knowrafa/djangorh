@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% comment %}
+ Main page to authenticate users.
+{% endcomment %}
+{% load staticfiles %}
+{% block head %}
+
+ <title>Django Consultants | Login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel = "stylesheet" href="{% static "/css/login/login.css" %}">
+{% endblock %}
+{% block body %}
+    <header>
+        <h1>Django Consultants</h1>
+        <h2>Login Page</h2>
+    </header>
+<section>
+    <div class="sidenav">
+         <div class="login-main-text">
+            <h2>Sistema de busca de vagas <br> Página de login</h2>
+            <p>Login or register from here to access.</p>
+         </div>
+    </div>
+
+    {% if form.errors %}
+        <p>Your username and password didn’t match, please try again.</p>
+    {% endif %}
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form method="post" action=".">
+                  {% csrf_token %}
+                  <div class="form-group">
+                      <label for="id_username">Username:</label>
+                      {{ form.username }}
+                  </div>
+                  <div class="form-group">
+                    <label for="id_password">Password:</label>
+                    {{ form.password }}
+                  </div>
+                  <button type="submit" class="btn btn-black">Login</button>
+                  <button type="submit" class="btn btn-secondary">Register</button>
+                  {% if next %}
+                      <input type="hidden" name="next" value="{{ next }}" />
+                  {% else %}
+                      <input type="hidden" name="next" value="/cadastro/" />
+                  {% endif %}
+               </form>
+            </div>
+         </div>
+      </div>
+</section>
+{% endblock %}

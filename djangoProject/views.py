@@ -20,7 +20,8 @@ def second_page(request):
 
 @login_required
 def homepage(request):
-    return HttpResponse("AQUI É SUA HOMEPAGE")
+    context={"name":request.user.username}
+    return HttpResponse("AQUI É SUA HOMEPAGE " + context["name"])
 
 @login_required
 def logout_page(request):

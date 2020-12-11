@@ -54,4 +54,4 @@ urlpatterns = [
     # path('login/', include('login.urls')),
     path('login/', auth_views.LoginView.as_view()),
     path('logout/', views.logout_page, name="logout")
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

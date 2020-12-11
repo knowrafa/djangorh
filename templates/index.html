@@ -1,18 +1,66 @@
-{% extends "base.html" %}
-{% comment %}
-  Main page of django_consultant's website.
-{% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
 
-{% block head %}
-  <title>Django Consultants</title>
-{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-{% block body %}
-  <header>
-      <h1>Django Consultants</h1>
-  </header>
+  <title>Bare - Start Bootstrap Template</title>
 
-  <section>
-      <p>Welcome to Django Consultants. Please click <a href="/second/">here</a> to log into our web portal.</p>
-  </section>
-{% endblock %}
+  <!-- Bootstrap core CSS -->
+  <link href="{% static "main_page/vendor/bootstrap/css/bootstrap.min.css"%}" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+          <img style="max-width:70px; margin-top: -7px;" alt="Brand" src="{% static "main_page/images/pica-pau-png.png" %}" class="img-responsive"/>
+          HÁ VAGAS?!
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="mt-5">Seja bem vindo ao Há Vagas?!</h1>
+        <p class="lead">Parece que você não está logado. Por favor, efetue o login <a href="/login/">aqui</a> </p>
+          <img src="{% static "main_page/images/ha-vagas.png" %}" class="img-responsive">
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static "main_page/vendor/jquery/jquery.slim.min.js" %}"></script>
+  <script src={" % static "main_page/vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+
+</body>
+</html>

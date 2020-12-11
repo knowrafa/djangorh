@@ -45,11 +45,13 @@ router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path('', views.main_page, name='principal'),
+    path('home/', views.homepage, name='home'),
     path('second/', views.second_page, name='second'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),  # Rest Framework API
     path('cadastro/', include('cadastro.urls')),
     path('vagas/', views.ver_vagas, name="ver_vagas"),
     # path('login/', include('login.urls')),
-    path('login/', auth_views.LoginView.as_view())
+    path('login/', auth_views.LoginView.as_view()),
+    path('logout/', views.logout_page, name="logout")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -8,10 +8,9 @@ def main_page(request):
     return render_to_response('index.html')
 
 
-@login_required()
+# @login_required() - Área pública de acesso
 def ver_vagas(request):
-    context = {'full_name': request.user.username}
-    Vagas.objects.all()
+    context = {'full_name': request.user.username, 'vagas':Vagas.objects.all()}
     return render_to_response('vagas.html', context)
 
 
@@ -19,6 +18,11 @@ def ver_vagas(request):
 def second_page(request):
     return HttpResponse("ola")
 
+@login_required
+def homepage(request):
+    return HttpResponse("AQUI É SUA HOMEPAGE")
+
+@login_required
 def logout_page(request):
     #Log users out and re-direct them to the main page.
     logout(request)

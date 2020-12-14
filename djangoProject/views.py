@@ -1,17 +1,27 @@
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from cadastro.models import Vagas
 
 def main_page(request):
-    return render_to_response('index.html')
+    context = {'user': request.user}
+    return render_to_response('index.html', context)
 
 
-# @login_required() - Área pública de acesso
+# @login_required() - Comentado pois é uma área pública de acesso
 def ver_vagas(request):
-    context = {'full_name': request.user.username, 'vagas':Vagas.objects.all()}
-    return render_to_response('vagas.html', context)
+    context = {}
+    context['vagas'] = Vagas.objects.all()
+    if request.method=="GET":
+        if request.GET:
+            print(request.GET)
+            pesquisa = request.GET.getlist('pesquisa')
+            print(pesquisa)
+            pesquisa = pesquisa[0]
+            vagas = Vagas.objects.filter(nome__contains=pesquisa)
+            context['vagas'] = vagas
+    return render(request, "vagas.html", context)
 
 
 @login_required

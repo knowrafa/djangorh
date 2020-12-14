@@ -45,7 +45,7 @@ router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path('', views.main_page, name='principal'),
-    path('home/', views.homepage, name='home'),
+    path('home/', views.main_page, name='home'),
     path('second/', views.second_page, name='second'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),  # Rest Framework API

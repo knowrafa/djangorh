@@ -11,29 +11,48 @@
 
 </head>
 <body>
-<div class="sidenav">
-         <div class="login-main-text">
-            <h2>Application<br> Login Page</h2>
-            <p>Login or register from here to access.</p>
-         </div>
-      </div>
-      <div class="main">
-         <div class="col-md-6 col-sm-12">
-            <div class="login-form">
-               <form method="post">
-                  <div class="form-group">
-                     <label>User Name</label>
-                     <input type="text" class="form-control" placeholder="User Name">
-                  </div>
-                  <div class="form-group">
-                     <label>Password</label>
-                     <input type="password" class="form-control" placeholder="Password">
-                  </div>
-                  <button type="submit" class="btn btn-black">Login</button>
-                  <button type="submit" class="btn btn-secondary">Register</button>
-               </form>
+    <section>
+        <div class="sidenav">
+             <div class="login-main-text">
+                <h2>Formulário de Cadastro<br></h2>
+                <p>Todos os dados são obrigatórios.</p>
+             </div>
+          </div>
+        <form class="main" method="post" action=".">
+            {% csrf_token %}
+            <p>
+            </p>
+            <div class="form-group">
+                {{ form.first_name }}
+                <label for="exampleInputFirstName">Primeiro nome</label>
+                <input type="text" class="form-control" name="first_name" id="exampleInputFirstName" placeHolder="Primeiro Nome">
             </div>
-         </div>
-      </div>
+            <div class="form-group">
+                {{ form.last_name }}
+                <label for="exampleInputLastName">Último nome</label>
+                <input type="text" class="form-control" name="last_name" id="exampleInputLastName" placeHolder="Primeiro Nome">
+            </div>
+            <div class="form-group">
+                {{ form.username }}
+                <label for="exampleInputUserName1">Usuário</label>
+                <input type="text" class="form-control" name="username" id="exampleInputUsername1" placeHolder="Primeiro Nome">
+            </div>
+            <div class="form-group">
+                {{ form.email }}
+                <label for="exampleInputEmail1">Endereço de email</label>
+                <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Seu email">
+                <small id="emailHelp" class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small>
+            </div>
+            <div class="form-group">
+                {{ form.senha }}
+                <label for="exampleInputPassword1">Senha</label>
+                <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Senha">
+            </div>
+            <p>
+                
+            </p>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </section>
 </body>
 </html>

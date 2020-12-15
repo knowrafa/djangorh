@@ -9,6 +9,7 @@ from django.urls import reverse
 from .forms import CadastroForm
 from .models import Vagas
 
+
 def index(request):
     response = "Página de index"
     return HttpResponse(response)
@@ -42,7 +43,7 @@ def cadastrar(request):
 
 def pesquisarvagas(request):
     context = {}
-    context['vagas'] = vagas
+    # context['vagas'] = vagas
     if request.method=="GET":
         print(request.GET)
         vagas =  Vagas.objects.get(nome__contains=request.GET['pesquisa'[0]])

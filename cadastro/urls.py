@@ -16,10 +16,16 @@ Including another URLconf
 from django.urls import path, include
 from . import views
 
+from rest_framework import routers
+from cadastro.api import UserViewSet, VagaViewSet
+api_router = routers.DefaultRouter()
+api_router.register(r"user", UserViewSet)
+api_router.register(r"vagas", VagaViewSet)
 
 app_name = 'cadastro'
 urlpatterns = [
     path('', views.cadastrar, name="cadastrar"),
+    path("api/", include(api_router.urls)),
     # path('', include(router.urls)),
     # path("api-auth/", include('rest_framework.urls', namespace='rest_framework'))
     # path('<int:pagina_id>/', views.cadastrar, name="cadastro"),

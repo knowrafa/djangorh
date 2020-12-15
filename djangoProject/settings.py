@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cadastro.apps.CadastroConfig',
+    'cadastro',
     'login.apps.LoginConfig',
     'rest_framework'
 ]
@@ -103,8 +103,6 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
-
-#AUTH_USER_MODEL = "cadastro.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {

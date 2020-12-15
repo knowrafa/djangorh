@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.urls import path, include
 from . import views
-
 from rest_framework import routers
 from cadastro.api import UserViewSet, VagaViewSet
 api_router = routers.DefaultRouter()

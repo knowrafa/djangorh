@@ -1,32 +1,16 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 # Create your models here.
 
 
 class Cadastro(models.Model):
     nome = models.CharField(max_length=255)
     email = models.EmailField()
+
     def __str__(self):
         return self.nome
-
-
-#class User(AbstractUser):
-#    pass
-
-
-
-class MyUserCreationForm(UserCreationForm):
-    class Meta:
-        email = {
-            'required': True
-        }
-        first_name = {
-            'required': True
-        }
-        last_name = {
-            'required': True
-        }
 
 
 class Curriculum(models.Model):

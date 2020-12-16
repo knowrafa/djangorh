@@ -8,6 +8,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+
 class VagaViewSet(viewsets.ModelViewSet):
     queryset = Vagas.objects.all()
     serializer_class = VagaSerializer

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 {% load static %}
+{% load rest_framework %}
 <head>
     <meta charset="UTF-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -45,13 +46,13 @@
       </thead>
       <tbody>
         {% if vagas %}
-            {% for vagas in vagas %}
+            {% for vaga in vagas %}
               <tr>
-              <th scope="row" style="text-align: center">{{ vagas.id }}</th>
-              <td >{{ vagas.nome }}</td>
-              <td >{{ vagas.descricao }}</td>
-              <td >{{ vagas.requisitos }}</td>
-              <td >{{ vagas.local }}</td>
+              <th scope="row" style="text-align: center">{{ vaga.id }}</th>
+              <td >{{ vaga.nome }}</td>
+              <td >{{ vaga.descricao }}</td>
+              <td >{{ vaga.requisitos }}</td>
+              <td >{{ vaga.local }}</td>
             </tr>
             {% endfor %}
         {% else %}

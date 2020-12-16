@@ -14,7 +14,6 @@ def index(request):
     response = "Página de index"
     return HttpResponse(response)
 
-
 def cadastrar(request):
     # response = "Tela de cadastro"
     context = {}

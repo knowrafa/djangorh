@@ -16,42 +16,36 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework import views as rest_views
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from . import views
-
-# Serializers define the API representation.
-
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'is_staff']
+from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework import routers
+from cadastro.api import UserViewSet, VagaViewSet
 
 # ViewSets define the view behavior.
 
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
 # Routers provide an easy way of automatically determining the URL conf.
 
-
-router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
+api_router = routers.DefaultRouter()
+api_router.register(r"user", UserViewSet)
+api_router.register(r"vagas", VagaViewSet)
 
 urlpatterns = [
     path('', views.main_page, name='principal'),
     path('home/', views.main_page, name='home'),
     path('second/', views.second_page, name='second'),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),  # Rest Framework API
+    path('api-vagas/', include(api_router.urls)),
+    path('api-auth/', include('rest_framework.urls')),  # Rest Framework API Authentication, com login e logout
     path('cadastro/', include('cadastro.urls')),
-    path('vagas/', views.ver_vagas, name="ver_vagas"),
-    # path('login/', include('login.urls')),
-    path('login/', auth_views.LoginView.as_view()),
-    path('logout/', views.logout_page, name="logout")
+    path('vagas/', views.VagasList.as_view(), name="ver_vagas"), # Utilizando o padrão resto na view VagasList
+    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'), # Deixando explícito o nome do template (argumentos não necessários)
+    # path('logout/', views.logout_page, name="logout"),
+    path('logout/', auth_views.LogoutView.as_view()), # View padrão de logout do Django
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# urlpatterns = format_suffix_patterns(urlpatterns)

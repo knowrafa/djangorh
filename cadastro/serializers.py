@@ -3,16 +3,17 @@ from .models import Vagas
 from rest_framework import serializers
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['id', 'url', 'username', 'email', 'is_staff', 'password']
 
 
 class VagaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vagas
         fields = [
+            "id",
             "nome",
             "descricao",
             "requisitos",

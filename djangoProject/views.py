@@ -2,11 +2,11 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, render
-from cadastro.serializers import VagaSerializer
+from cadastro.serializers import VagaSerializer, UserSerializer
 from cadastro.models import Vagas
 from rest_framework import mixins
 from rest_framework.renderers import TemplateHTMLRenderer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 # Rest import
 from rest_framework import status
@@ -56,12 +56,18 @@ class VagasList(APIView):
     """
         Lista todas as vagas, utilizando APIView
     """
-    permission_classes = [IsAuthenticatedOrReadOnly] #Se estiver Autenticado pode realizar POST, se não pode apenas realizar GET
+    #permission_classes = [IsAuthenticatedOrReadOnly] #Se estiver Autenticado pode realizar POST, se não pode apenas realizar GET
+    #permission_classes = [IsAuthenticated]
+
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'vagas.html'
     # @login_required DOESNT WORK HERE!!
 
     def get(self, request, format=None):
+
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect("/login?next=/vagas/")
+
         try:
             pesquisa = request.GET.getlist('pesquisa')
             pesquisa = pesquisa[0]
@@ -78,7 +84,6 @@ class VagasList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 '''
 @api_view(['GET', 'POST'])
@@ -122,10 +127,34 @@ def second_page(request):
 
 
 # UTILIZANDO DJANGO TEMPLATE PARA AUTENTICAÇÃO
-@login_required
+
+# API REST PARA A VIEW DA PÁGINA INICIAL DO USUARIO
+class HomePageUserView(APIView):
+    """
+        Homepage do usuário
+    """
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'home.html'
+
+    def get(self, request):
+        return Response()
+
+    def post(self, request):
+        return Response()
+
+
 def homepage(request):
     context={"name":request.user.username}
     return HttpResponse("AQUI É SUA HOMEPAGE " + context["name"])
+
+
+class LogoutUser(APIView):
+    """
+        Homepage do usuário
+    """
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect('/')
 
 
 # UTILIZANDO DJANGO TEMPLATE

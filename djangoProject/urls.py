@@ -37,15 +37,15 @@ api_router.register(r"vagas", VagaViewSet)
 
 urlpatterns = [
     path('', views.main_page, name='principal'),
-    path('home/', views.main_page, name='home'),
-    path('second/', views.second_page, name='second'),
-    path('admin/', admin.site.urls),
+    path('home/', views.HomePageUserView.as_view(), name='home'),
+    path('second/', views.second_page, name='second'), # Página exemplo
+    path('admin/', admin.site.urls), # Página da administração
     path('api-vagas/', include(api_router.urls)),
     path('api-auth/', include('rest_framework.urls')),  # Rest Framework API Authentication, com login e logout
     path('cadastro/', include('cadastro.urls')),
     path('vagas/', views.VagasList.as_view(), name="ver_vagas"), # Utilizando o padrão resto na view VagasList
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'), # Deixando explícito o nome do template (argumentos não necessários)
     # path('logout/', views.logout_page, name="logout"),
-    path('logout/', auth_views.LogoutView.as_view()), # View padrão de logout do Django
+    path('logout/', views.LogoutUser.as_view(), name='logout'), # View padrão de logout do Django
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # urlpatterns = format_suffix_patterns(urlpatterns)

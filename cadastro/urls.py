@@ -23,7 +23,7 @@ api_router.register(r"vagas", VagaViewSet)
 
 app_name = 'cadastro'
 urlpatterns = [
-    path('', views.cadastrar, name="cadastrar"),
+    path('', views.CadastrarUsuario.as_view(), name="cadastrar"),
     path("api/", include(api_router.urls)),
     # path('', include(router.urls)),
     # path("api-auth/", include('rest_framework.urls', namespace='rest_framework'))

@@ -26,7 +26,7 @@
         </form>
         <form method="get" action="." class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
             {{ pesquisa }}
-            <input class="form-control column form-control-sm mr-4 w-120" name="pesquisa" type="text" placeholder="Buscar vagas..."
+            <input class="form-control column form-control-sm mr-4 w-120" name="p" type="text" placeholder="Buscar vagas..."
                    aria-label="Procurar Vagas">
               <i class="fas fa-search" aria-hidden="true"></i>
         </form>
@@ -42,6 +42,7 @@
           <th scope="col">Descrição da Vaga</th>
           <th scope="col">Requisitos</th>
           <th scope="col">Local</th>
+          <th scope="col">Filme Relacionado</th>
         </tr>
       </thead>
       <tbody>
@@ -53,6 +54,7 @@
               <td >{{ vaga.descricao }}</td>
               <td >{{ vaga.requisitos }}</td>
               <td >{{ vaga.local }}</td>
+              <td> {{movie.title}}, by: {{movie.director}}</td>
             </tr>
             {% endfor %}
         {% else %}

@@ -44,6 +44,13 @@ class VagaSerializer(serializers.ModelSerializer):
             "faixa_salarial"
         ]
 
+
+class MovieSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=255)
+    email = serializers.EmailField()
+
+
+
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group

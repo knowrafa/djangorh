@@ -5,8 +5,11 @@ from django.shortcuts import render_to_response, render
 from cadastro.serializers import VagaSerializer, UserSerializer
 from cadastro.models import Vagas
 from rest_framework import mixins
+import requests
+import random
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework_api_key.permissions import HasAPIKey
 
 # Rest import
 from rest_framework import status
@@ -32,6 +35,37 @@ class VagasListGeneric(generics.ListCreateAPIView):
 class VagasDetailGeneric(generics.RetrieveUpdateDestroyAPIView):
     queryset = Vagas.objects.all()
     serializer_class = VagaSerializer
+
+
+class ApiVagasList(APIView):
+    permission_classes = [HasAPIKey] # Rest API Key
+
+
+
+    def get(self, request, format=None):
+
+        # Verifica se o usuário está autenticado
+        # if not request.user.is_authenticated:
+        #    return HttpResponseRedirect("/login?next=/vagas/")
+
+        try:
+            pesquisa = request.GET['p']
+            vagas = Vagas.objects.filter(nome__contains=pesquisa)
+
+            movie_search = pesquisa
+        except:
+            movie_search = 'arrival'
+            vagas = Vagas.objects.all()
+
+        payload = {"apikey": "53aefdae", "t": movie_search}
+        movie_related = requests.get("http://www.omdbapi.com/", params=payload)
+        print(movie_related.json())
+        serializer = VagaSerializer(vagas, many=True)
+
+        movie = movie_related.json()
+        if movie['Response']:
+            pass
+        return Response({'vagas': serializer.data, 'movie': {'title': movie['Title'], 'director': movie['Director']}})
 
 
 class VagasListMixin(mixins.ListModelMixin,
@@ -65,18 +99,45 @@ class VagasList(APIView):
 
     def get(self, request, format=None):
 
-        if not request.user.is_authenticated:
-            return HttpResponseRedirect("/login?next=/vagas/")
+        # Verifica se o usuário está autenticado
+        # if not request.user.is_authenticated:
+        #    return HttpResponseRedirect("/login?next=/vagas/")
 
-        try:
-            pesquisa = request.GET.getlist('pesquisa')
-            pesquisa = pesquisa[0]
+        #print(request.GET.getlist())
+
+        # Note: verificar se existe mais de um argumento no GET
+
+        if request.GET['p']:
+            pesquisa = request.GET['p']
+            movie_search = pesquisa
             vagas = Vagas.objects.filter(nome__contains=pesquisa)
-        except:
+        else:
+            movie_search = 'arrival'
             vagas = Vagas.objects.all()
 
+        '''
+        try:
+            pesquisa = request.GET.getlist('pesquisa')
+            print(request.GET)
+            pesquisa = pesquisa[0]
+            vagas = Vagas.objects.filter(nome__contains=pesquisa)
+
+            movie_search = pesquisa
+        except:
+            movie_search = 'arrival'
+            vagas = Vagas.objects.all()
+        '''
+
+        payload = {"apikey": "53aefdae", "t": movie_search}
+        movie_related = requests.get("http://www.omdbapi.com/", params=payload)
+        #print(movie_related.json())
         serializer = VagaSerializer(vagas, many=True)
-        return Response({'vagas': serializer.data})
+
+        movie = movie_related.json()
+        if movie['Response']:
+            pass
+
+        return Response({'vagas': serializer.data, 'movie': {'title': movie['Title'], 'director': movie['Director']}})
 
     def post(self, request, format=None):
         serializer = VagaSerializer(data=request.data)

@@ -31,8 +31,10 @@ from cadastro.api import UserViewSet, VagaViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
 
+
+# Registrando rotas para poder criar novos usuários, vagas e todas as viewsets configuradas
 api_router = routers.DefaultRouter()
-api_router.register(r"user", UserViewSet)
+api_router.register(r"users", UserViewSet)
 api_router.register(r"vagas", VagaViewSet)
 
 urlpatterns = [
@@ -40,12 +42,13 @@ urlpatterns = [
     path('home/', views.HomePageUserView.as_view(), name='home'),
     path('second/', views.second_page, name='second'), # Página exemplo
     path('admin/', admin.site.urls), # Página da administração
-    path('api-vagas/', include(api_router.urls)),
+    # path('api-vagas/', include(api_router.urls)),
     path('api-auth/', include('rest_framework.urls')),  # Rest Framework API Authentication, com login e logout
     path('cadastro/', include('cadastro.urls')),
     path('vagas/', views.VagasList.as_view(), name="ver_vagas"), # Utilizando o padrão resto na view VagasList
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'), # Deixando explícito o nome do template (argumentos não necessários)
     # path('logout/', views.logout_page, name="logout"),
+    path('apivagas/', views.ApiVagasList.as_view(), name="api-vagas"),
     path('logout/', views.LogoutUser.as_view(), name='logout'), # View padrão de logout do Django
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # urlpatterns = format_suffix_patterns(urlpatterns)

@@ -22,14 +22,26 @@ class CadastroSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         # create user
-        user = User.objects.create(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            password=validated_data['password'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name']
-        )
-        return user
+        try:
+            print(validated_data)
+            user = User.objects.create(**validated_data)
+            """
+                user = User.objects.create(
+                    username=validated_data['username'],
+                    email=validated_data['email'],
+                    password=validated_data['password'],
+                    first_name=validated_data['first_name'],
+                    last_name=validated_data['last_name']
+                )
+            """
+        except:
+            print("falhou chefe")
+        else:
+            # salvando usuário
+            user.save()
+            return True
+
+        return False
 
 
 class VagaSerializer(serializers.ModelSerializer):

@@ -17,14 +17,18 @@ from django.urls import path, include
 from . import views
 from rest_framework import routers
 from cadastro.api import UserViewSet, VagaViewSet
+
 api_router = routers.DefaultRouter()
-api_router.register(r"user", UserViewSet)
+api_router.register(r"users", UserViewSet)
 api_router.register(r"vagas", VagaViewSet)
 
+# Lembrar o motivo de dar nome para o app
 app_name = 'cadastro'
 urlpatterns = [
     path('', views.CadastrarUsuario.as_view(), name="cadastrar"),
     path("api/", include(api_router.urls)),
+    # Ainda não entendi o que significa
+    path("auth/", include("rest_auth.urls")),
     # path('', include(router.urls)),
     # path("api-auth/", include('rest_framework.urls', namespace='rest_framework'))
     # path('<int:pagina_id>/', views.cadastrar, name="cadastro"),

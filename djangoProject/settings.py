@@ -25,7 +25,9 @@ SECRET_KEY = 'bfeei*#x#$%q6e$3hn!5!^idpqqep)#ro15@a%3#^yo%x1a)i='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*',
+]
 
 
 # Application definition
@@ -39,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cadastro',
     'rest_framework',
-    'rest_framework_api_key'
+    'rest_framework_api_key',
+    'rest_framework.authtoken',
+    'rest_auth',
 ]
 
 MIDDLEWARE = [
@@ -59,13 +63,18 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.IsAuthenticated', # O padrão de permissão para realizar requisições, se o usuário estiver autenticado, ele pode realizar: GET/POST/PUT/PATCH/DELETE. Se não estiver, não pode realizar nem uma
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        #'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+REST_USE_JWT = True
 
 ROOT_URLCONF = 'djangoProject.urls'
 

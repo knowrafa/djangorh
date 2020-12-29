@@ -4,49 +4,66 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.db import IntegrityError
 from django.core.exceptions import *
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .forms import CadastroForm
 from .models import Vagas
 from .serializers import CadastroSerializer
+
+import logging
 
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 
+
 def index(request):
     response = "Página de index"
     return HttpResponse(response)
 
 
+# Cadastro com Rest Framework API
 class CadastrarUsuario(APIView):
     """
         Lista todas as vagas, utilizando APIView
     """
-    #permission_classes = [IsAuthenticatedOrReadOnly] #Se estiver Autenticado pode realizar POST, se não pode apenas realizar GET
-    #permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticatedOrReadOnly]
+    # Se estiver Autenticado pode realizar POST, se não pode apenas realizar GET
+    # permission_classes = [IsAuthenticated]
 
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'cadastro/cadastro.html'
     # @login_required DOESNT WORK HERE!!
 
-    def get(self, request, format=None):
+    @staticmethod
+    def get(request):
 
         # if not request.user.is_authenticated:
         #    return HttpResponseRedirect("/login?next=/vagas/")
         return Response()
 
-    def post(self, request, format=None):
+    @staticmethod
+    def post(request):
         serializer = CadastroSerializer(data=request.data)
+
+        # Testar se o serializer fica válido com mais informações do que o necessário
         if serializer.is_valid():
-            serializer.save()
-            print("É VÁLIDO")
-            print(serializer)
-            # print(**serializer)
-            ndict = {'serializer': serializer.data}
-            print(ndict)
-            return Response({'user':serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            # Verifica se o create funciona (retorna True ou False - Método sobrescrito)
+            if serializer.create(validated_data=serializer.data):
+
+                # Testando a biblioteca de logging
+                logging.debug("DEU CERTO MEU PATRÃO")
+
+                # Redireciona para a página inicial, caso dê certo a criação do login
+                return HttpResponseRedirect(redirect_to='/')
+
+        # Envia um dicionário com o campo não preenchido e o erro relacionado
+        # Dá um LOG de erro
+        logging.error(serializer.errors)
+
+        # Coloquei um dicionário com a chave errors para ficar mais legível no html
+        return Response({"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 def cadastrar(request):

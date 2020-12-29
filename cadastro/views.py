@@ -39,6 +39,7 @@ class CadastrarUsuario(APIView):
     @staticmethod
     def get(request):
 
+        # Verificando autenticação do usuário e redirecionando à página de login
         # if not request.user.is_authenticated:
         #    return HttpResponseRedirect("/login?next=/vagas/")
         return Response()
@@ -49,9 +50,11 @@ class CadastrarUsuario(APIView):
 
         # Testar se o serializer fica válido com mais informações do que o necessário
         if serializer.is_valid():
+
             # Verifica se o create funciona (retorna True ou False - Método sobrescrito)
             if serializer.create(validated_data=serializer.data):
                 username = serializer.data['username']
+
                 # Criando API KEY com base no usuário (o user é único)
                 api_key, key = APIKey.objects.create_key(name=username)
                 print(api_key, key)
@@ -74,8 +77,8 @@ class CadastrarUsuario(APIView):
         return Response({"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# Cadastro utilizando Django Templates (Não está sendo utilizado)
 def cadastrar(request):
-    # response = "Tela de cadastro"
     context = {}
     if request.method == "POST":
         form = CadastroForm(request.POST)
@@ -103,6 +106,7 @@ def cadastrar(request):
     return render(request, "cadastro/cadastro.html", context)
 
 
+# Pesquisa utilizando Django Templates (Não está sendo utilizado)
 def pesquisarvagas(request):
     context = {}
     # context['vagas'] = vagas

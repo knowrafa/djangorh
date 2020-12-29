@@ -1,8 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
+from rest_framework_api_key.models import AbstractAPIKey
 # Create your models here.
+
+
+class ManageAPIKey(AbstractAPIKey):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE, related_name="api_key")
 
 
 class Cadastro(models.Model):
@@ -11,8 +16,6 @@ class Cadastro(models.Model):
 
     def __str__(self):
         return self.nome
-
-
 
 
 class Curriculum(models.Model):

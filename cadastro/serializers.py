@@ -20,10 +20,11 @@ class CadastroSerializer(serializers.ModelSerializer):
             'last_name',
         ]
 
-    def create(self, validated_data):
+    def create(self, validated_data) -> bool:
         # create user
         try:
-            print(validated_data)
+            # Verificar se preciso implementar ou posso enviar já desconstruído
+            # Desconstrói o dicionário validated data
             user = User.objects.create(**validated_data)
             """
                 user = User.objects.create(
@@ -40,7 +41,6 @@ class CadastroSerializer(serializers.ModelSerializer):
             # salvando usuário
             user.save()
             return True
-
         return False
 
 
@@ -57,12 +57,14 @@ class VagaSerializer(serializers.ModelSerializer):
         ]
 
 
+# Acho que isso não funciona agora
 class MovieSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=255)
     email = serializers.EmailField()
 
 
 
+# Acho que isso não funciona agora
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group

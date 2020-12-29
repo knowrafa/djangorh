@@ -13,6 +13,8 @@ class Cadastro(models.Model):
         return self.nome
 
 
+
+
 class Curriculum(models.Model):
     INTERESSES_CHOICE = [
         ("Estágio", "Estágio"),

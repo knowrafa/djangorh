@@ -41,9 +41,9 @@
                      <input type="password" name="password" class="form-control" placeholder="Digite a senha">
                   </div>
                   <button type="submit" class="btn btn-black">Login</button>
-                   <a style="color: white;" href="/cadastro/"><button type="button" onclick="href='/cadastro/'" class="btn btn-secondary" action="/cadastro/">Cadastre-se</button></a>
-                   <p></p>
-                   {% if form.errors %}
+                  <a style="color: white;" href="/cadastro/"><button type="button" onclick="href='/cadastro/'" class="btn btn-secondary" action="/cadastro/">Cadastre-se</button></a>
+                  <p></p>
+                  {% if form.errors %}
                         <div class="alert alert-danger" role="alert" id = "errorAlert" onclick="style.display='none'">
                            Dados inválidos! <strong>Verifique as credenciais e tente novamente</strong>
                            <p>clique para fechar a mensagem</p>
@@ -51,10 +51,10 @@
                         </div>
                    {% endif %}
 
-                   {% if next %}
-                      <input type="hidden" name="next" value="{{ next }}" />
+                  {% if next %}
+                    <input type="hidden" name="next" value="{{ next }}" />
                   {% else %}
-                      <input type="hidden" name="next" value="/home/" />
+                    <input type="hidden" name="next" value="/home/" />
                   {% endif %}
                </form>
             </div>

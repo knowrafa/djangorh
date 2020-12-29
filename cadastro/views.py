@@ -15,6 +15,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
+from rest_framework_api_key.models import APIKey
 
 
 def index(request):
@@ -48,9 +49,16 @@ class CadastrarUsuario(APIView):
 
         # Testar se o serializer fica válido com mais informações do que o necessário
         if serializer.is_valid():
-
             # Verifica se o create funciona (retorna True ou False - Método sobrescrito)
             if serializer.create(validated_data=serializer.data):
+                username = serializer.data['username']
+                # Criando API KEY com base no usuário (o user é único)
+                api_key, key = APIKey.objects.create_key(name=username)
+                print(api_key, key)
+                user = User.objects.get(username=username)
+
+                # logout(request)
+                login(request, user)
 
                 # Testando a biblioteca de logging
                 logging.debug("DEU CERTO MEU PATRÃO")

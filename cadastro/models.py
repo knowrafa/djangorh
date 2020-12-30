@@ -1,13 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 # from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
-from rest_framework_api_key.models import AbstractAPIKey
+from rest_framework_api_key.models import APIKey
+from django.contrib.auth.models import AbstractUser
+
+
 # Create your models here.
 
+class User(AbstractUser):
+    chave = models.CharField(max_length=100, blank=True)
 
-class ManageAPIKey(AbstractAPIKey):
-    user = models.OneToOneField(to=User, on_delete=models.CASCADE, related_name="api_key")
+    def save(self, *args, **kwargs):
+        _, key = APIKey.objects.create_key(name=self.username)
+        self.chave = key
+        print("Chave do usuario %s: %s" % (self.username, key))
+        super(User, self).save(*args, **kwargs)
+
+
+# Criando uma API Key relacionada com um único usuário
+# class ManageAPIKey(AbstractAPIKey):
+#     user = models.OneToOneField(to=User, on_delete=models.CASCADE, related_name='api_key')
 
 
 class Cadastro(models.Model):

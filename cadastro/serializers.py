@@ -1,6 +1,44 @@
-from django.contrib.auth.models import User, Group
-from .models import Vagas
+from django.contrib.auth.models import Group
+from django.db import transaction
+
+from .models import Vagas, User
 from rest_framework import serializers
+
+
+# class ManageApiKeySerializer(serializers.ModelSerializer):
+#
+#     # Guardando chave
+#     # key = serializers.SerializerMethodField(method_name='create')
+#
+#     class Meta:
+#         model = ManageAPIKey
+#         fields = [
+#             'user',
+#             'name',
+#             # 'key',
+#         ]
+#
+#         # @staticmethod
+#         def create(self, validated_data):
+#             # Cria a key, baseado no usuário e no nome dele recebido
+#             _, generated_key = ManageAPIKey.objects.create_key(**validated_data)
+#             user_instance = User.objects.filter(username=validated_data['name'])
+#             print("chama o update")
+#             self.update(username=validated_data['name'], key=generated_key)
+#             return generated_key
+#
+#         @staticmethod
+#         def update(username, **kwargs):
+#             print("Como funciona o kwargs: ")
+#             print(kwargs)
+#             # Utiliza os próximos argumentos para atualizar a apikey
+#             for field, value in kwargs:
+#                 print(field, value)
+#                 try:
+#                     ManageAPIKey.objects.filter(name=username).update(field=value)
+#                 except:
+#                     break
+#             pass
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -12,36 +50,27 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class CadastroSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = [
-            'username',
-            'email',
-            'password',
-            'first_name',
-            'last_name',
-        ]
+        fields = ('username', 'email', 'password', 'first_name', 'last_name',)
 
-    def create(self, validated_data) -> bool:
-        # create user
-        try:
-            # Verificar se preciso implementar ou posso enviar já desconstruído
-            # Desconstrói o dicionário validated data
-            user = User.objects.create(**validated_data)
-            """
-                user = User.objects.create(
-                    username=validated_data['username'],
-                    email=validated_data['email'],
-                    password=validated_data['password'],
-                    first_name=validated_data['first_name'],
-                    last_name=validated_data['last_name']
-                )
-            """
-        except:
-            print("falhou chefe")
-        else:
-            # salvando usuário
-            user.save()
-            return True
-        return False
+    @transaction.atomic
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
+    # def create(self, validated_data) -> bool:
+    #     # create user
+    #     try:
+    #         # !TODO Verificar se preciso implementar ou posso enviar já desconstruído
+    #         # Desconstrói o dicionário validated data e cria o usuário
+    #         # Caso dê erros retorna um serializer.error
+    #         user = User.objects.create_user(**validated_data)
+    #     except:
+    #         print("falhou chefe")
+    #     else:
+    #         # salvando usuário
+    #         user.save()
+    #         return True
+    #     return False
+    # 
 
 
 class VagaSerializer(serializers.ModelSerializer):
@@ -61,7 +90,6 @@ class VagaSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=255)
     email = serializers.EmailField()
-
 
 
 # Acho que isso não funciona agora

@@ -3,7 +3,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, render
-
+# from cadastro.models import ManageAPIKey
 # Cadastro imports
 from cadastro.serializers import VagaSerializer
 from cadastro.models import Vagas

@@ -1,10 +1,10 @@
 from rest_framework import viewsets
-from .models import User, Vagas
+from .models import Usuario, Vagas
 from .serializers import UserSerializer, VagaSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = Usuario.objects.all()
     serializer_class = UserSerializer
 
 

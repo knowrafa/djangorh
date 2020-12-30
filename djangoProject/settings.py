@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cadastro',
+
     'rest_framework',
     'rest_framework_api_key',
     'rest_framework.authtoken',
     'rest_auth',
+
+    'cadastro',
 ]
 
 MIDDLEWARE = [
@@ -80,12 +82,12 @@ REST_USE_JWT = True
 
 ROOT_URLCONF = 'djangoProject.urls'
 
-AUTH_USER_MODEL = "cadastro.User"
+AUTH_USER_MODEL = "cadastro.Usuario"
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': str(os.path.join(BASE_DIR, "templates")),
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,8 +109,12 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': "djangorh",
+        'USER': 'postgres',
+        'PASSWORD': '123',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -154,5 +160,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    str(os.path.join(BASE_DIR, 'static'))
 ]

@@ -1,7 +1,7 @@
 from django.contrib.auth.models import Group
 from django.db import transaction
 
-from .models import Vagas, User
+from .models import Vagas, Usuario
 from rest_framework import serializers
 
 
@@ -43,18 +43,18 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
+        model = Usuario
         fields = ['id', 'url', 'username', 'email', 'is_staff', 'password']
 
 
 class CadastroSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Usuario
         fields = ('username', 'email', 'password', 'first_name', 'last_name',)
 
     @transaction.atomic
     def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
+        user = Usuario.objects.create_user(**validated_data)
         return user
     # def create(self, validated_data) -> bool:
     #     # create user

@@ -28,7 +28,6 @@ urlpatterns = [
     path('', views.CadastrarUsuario.as_view(), name="cadastrar"),
     path("api/", include(api_router.urls)),
     # Ainda não entendi o que significa
-    path("auth/", include("rest_auth.urls")),
     # path('', include(router.urls)),
     # path("api-auth/", include('rest_framework.urls', namespace='rest_framework'))
     # path('<int:pagina_id>/', views.cadastrar, name="cadastro"),

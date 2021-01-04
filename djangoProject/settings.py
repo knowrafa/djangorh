@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_api_key',
     'rest_framework.authtoken',
-    'rest_auth',
 
     'cadastro',
 ]
@@ -83,7 +82,7 @@ REST_USE_JWT = True
 ROOT_URLCONF = 'djangoProject.urls'
 
 AUTH_USER_MODEL = "cadastro.Usuario"
-
+# AUTH_USER_MODEL = ""
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

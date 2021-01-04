@@ -7,9 +7,10 @@ from rest_framework_api_key.models import APIKey
 # Create your models here.
 
 class Usuario(AbstractUser):
-    chave = models.CharField(max_length=100, blank=True)
-    chave_api = models.OneToOneField(APIKey, on_delete=models.DO_NOTHING)
-
+    pass
+    # chave = models.CharField(max_length=100, blank=True)
+    # chave_api = models.OneToOneField(APIKey, on_delete=models.DO_NOTHING)
+    '''
     def save(self, *args, **kwargs):
         if self.chave is None:
             object_key, key = APIKey.objects.create_key(name=self.username)
@@ -17,7 +18,7 @@ class Usuario(AbstractUser):
             self.chave_api = object_key
             print("Chave do usuario %s: %s" % (self.username, key))
         super(Usuario, self).save(*args, **kwargs)
-
+    '''
 
 # Criando uma API Key relacionada com um único usuário
 # class ManageAPIKey(AbstractAPIKey):

@@ -87,7 +87,8 @@ AUTH_USER_MODEL = "cadastro.Usuario"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': str(os.path.join(BASE_DIR, "templates")),
+        # 'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [str(os.path.join(BASE_DIR, "templates"))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -160,5 +161,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
+    # BASE_DIR / "static",
     str(os.path.join(BASE_DIR, 'static'))
 ]

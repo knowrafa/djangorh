@@ -19,6 +19,7 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from django.views.static import serve
 from rest_framework import routers
 from cadastro.api import UserViewSet, VagaViewSet
 
@@ -45,5 +46,7 @@ urlpatterns = [
     # path('logout/', views.logout_page, name="logout"),
     # View padrão de logout do Django
     path('logout/', views.LogoutUser.as_view(), name='logout'),
+    path('media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    path('static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # urlpatterns = format_suffix_patterns(urlpatterns)

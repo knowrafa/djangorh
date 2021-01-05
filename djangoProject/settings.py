@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'bfeei*#x#$%q6e$3hn!5!^idpqqep)#ro15@a%3#^yo%x1a)i='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '*',
@@ -121,11 +121,11 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #    'NAME': "postgres",
-        #    'USER': 'postgres',
-        #    'PASSWORD': '123',
-        #    'HOST': '127.0.0.1',
-        #    'PORT': '5432',
+        'NAME': "postgres",
+        'USER': 'postgres',
+        'PASSWORD': '123',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 

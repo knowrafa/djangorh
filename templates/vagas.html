@@ -32,9 +32,11 @@
         </form>
     </div>
 </nav>
+
 <div class="table-responsive">
-    <label class="vagas_disponiveis">Vagas disponíveis</label>
+    <label class="vagas_disponiveis">Vagas</label>
     <table class="table">
+    {% if vagas %}
       <thead class="thead-dark">
         <tr>
           <th scope="col" style="text-align: center">ID da Vaga</th>
@@ -46,24 +48,25 @@
         </tr>
       </thead>
       <tbody>
-        {% if vagas %}
-            {% for vaga in vagas %}
-              <tr>
-              <th scope="row" style="text-align: center">{{ vaga.id }}</th>
-              <td >{{ vaga.nome }}</td>
-              <td >{{ vaga.descricao }}</td>
-              <td >{{ vaga.requisitos }}</td>
-              <td >{{ vaga.local }}</td>
-              <td> {{movie.title}}, by: {{movie.director}}</td>
-            </tr>
-            {% endfor %}
-        {% else %}
-            <div style="text-align: center">
-            <img src="{% static "main_page/images/no-vacancy.jpg" %}" alt ="" class="img-responsive">
-           </div>
-        {% endif %}
-      </tbody>
-    </table>
+        {% for vaga in vagas %}
+          <tr>
+          <th scope="row" style="text-align: center">{{ vaga.id }}</th>
+          <td >{{ vaga.nome }}</td>
+          <td >{{ vaga.descricao }}</td>
+          <td >{{ vaga.requisitos }}</td>
+          <td >{{ vaga.local }}</td>
+          <td> {{ vaga.title }}, by: {{ vaga.director }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+{% else %}
+        <div style="text-align: center">
+        <img src="{% static "main_page/images/no-vacancy.jpg" %}" alt ="" class="img-responsive">
+       </div>
+{% endif %}
+</table>
+
 </div>
 </body>
 </html>

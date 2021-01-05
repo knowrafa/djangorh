@@ -16,14 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework import views as rest_views
-from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets
 from . import views
-from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework import routers
 from cadastro.api import UserViewSet, VagaViewSet
 
@@ -40,15 +35,15 @@ api_router.register(r"vagas", VagaViewSet)
 urlpatterns = [
     path('', views.main_page, name='principal'),
     path('home/', views.HomePageUserView.as_view(), name='home'),
-    path('second/', views.second_page, name='second'), # Página exemplo
-    path('admin/', admin.site.urls), # Página da administração
+    # Página da administração
+    path('admin/', admin.site.urls),
     # path('api-vagas/', include(api_router.urls)),
-    path('api-auth/', include('rest_framework.urls')),  # Rest Framework API Authentication, com login e logout
     path('cadastro/', include('cadastro.urls')),
-    path('vagas/', views.VagasList.as_view(), name="ver_vagas"), # Utilizando o padrão resto na view VagasList
-    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'), # Deixando explícito o nome do template (argumentos não necessários)
+    path('vagas/', include('vagas.urls')),
+    # Deixando explícito o nome do template (argumentos não necessários)
+    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     # path('logout/', views.logout_page, name="logout"),
-    path('apivagas/', views.ApiVagasList.as_view(), name="api-vagas"),
-    path('logout/', views.LogoutUser.as_view(), name='logout'), # View padrão de logout do Django
+    # View padrão de logout do Django
+    path('logout/', views.LogoutUser.as_view(), name='logout'),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # urlpatterns = format_suffix_patterns(urlpatterns)

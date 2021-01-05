@@ -10,7 +10,6 @@
 
   <title>Página Inicial</title>
 
-  <!-- Bootstrap core CSS -->
   <link href="{% static "main_page/vendor/bootstrap/css/bootstrap.min.css"%}" rel="stylesheet">
 
 </head>
@@ -56,6 +55,8 @@
         <h1 class="mt-5">Seja bem vindo ao Há Vagas?!</h1>
           {% if user.is_authenticated %}
             <p>Seja bem vindo, {{ user.first_name}} {{ user.last_name }}!</p>
+            <p>Sua api key é {{ user.chave }}</p>
+            <p>Seu prefix é {{ user.chave_api.prefix }}</p>
           {% else %}
             <p class="lead">Parece que você não está logado. Por favor, efetue o login <a href="/login/">aqui</a> </p>
           {% endif %}

@@ -46,7 +46,7 @@ urlpatterns = [
     # path('logout/', views.logout_page, name="logout"),
     # View padrão de logout do Django
     path('logout/', views.LogoutUser.as_view(), name='logout'),
-    path('media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
-    path('static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+    # path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    # path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # urlpatterns = format_suffix_patterns(urlpatterns)

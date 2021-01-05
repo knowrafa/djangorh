@@ -1,55 +1,10 @@
 [
     {
         "model": "cadastro.vagas",
-        "pk": 3,
         "fields": {
-            "nome": "Vaga para Python",
-            "descricao": "Vaga para Python",
-            "requisitos": "Saber um pouco de python",
-            "local": "Goi\u00e2nia",
-            "faixa_salarial": "3500,00"
-        }
-    },
-    {
-        "model": "cadastro.vagas",
-        "pk": 4,
-        "fields": {
-            "nome": "Vaga para C++",
-            "descricao": "Vaga para C++",
-            "requisitos": "Saber um pouco de C++",
-            "local": "Goi\u00e2nia",
-            "faixa_salarial": "3500,00"
-        }
-    },
-    {
-        "model": "cadastro.vagas",
-        "pk": 5,
-        "fields": {
-            "nome": "Vaga para Java",
-            "descricao": "Vaga para Java",
-            "requisitos": "Saber um pouco de java",
-            "local": "Goi\u00e2nia",
-            "faixa_salarial": "3500,00"
-        }
-    },
-    {
-        "model": "cadastro.vagas",
-        "pk": 6,
-        "fields": {
-            "nome": "Vaga para Ajax",
-            "descricao": "Vaga para Ajax",
-            "requisitos": "Saber um pouco de ajax",
-            "local": "Goi\u00e2nia",
-            "faixa_salarial": "3500,00"
-        }
-    },
-    {
-        "model": "cadastro.vagas",
-        "pk": 7,
-        "fields": {
-            "nome": "Vaga para HTML/CSS",
-            "descricao": "Vaga para HTML/CSS",
-            "requisitos": "Saber um pouco de html/css",
+            "nome": "Especialista em Banco de Dados",
+            "descricao": "Ser especialista em banco de dados",
+            "requisitos": "Saber ORACLE",
             "local": "Goi\u00e2nia",
             "faixa_salarial": "3500,00"
         }

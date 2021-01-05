@@ -143,11 +143,23 @@ class ApiVagasList(APIView):
                 # Se der merda já sabe
                 payload['response'] = False
                 payload['error'] = 'Invalid API Key'
-                get_status = status.HTTP_418_IM_A_TEAPOT
+                get_status = status.HTTP_203_NON_AUTHORITATIVE_INFORMATION
             else:
-                # Executa quando o try não tem problemas
-                vagas = Vagas.objects.all()
                 payload['response'] = True
+                pesquisa = request.GET.get('p')
+                if pesquisa:
+                    vagas = Vagas.objects.filter(nome__icontains=pesquisa)
+                    if not vagas:
+                        payload['info'] = 'Não existem vagas disponíveis que contenham ' + pesquisa
+                        get_status = status.HTTP_202_ACCEPTED
+                        return Response(payload, status=get_status)
+                # Executa quando o try não tem problemas
+                else:
+                    vagas = Vagas.objects.all()
+                    if not vagas:
+                        payload['info'] = 'Não existem vagas disponíveis'
+                        get_status = status.HTTP_202_ACCEPTED
+                        return Response(payload, status=get_status)
 
                 # Serializa todos as vagas e guarda na lista de vagas
                 serializer = VagaSerializer(vagas, many=True)

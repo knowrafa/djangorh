@@ -60,14 +60,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
-]
 
-MIDDLEWARE_CLASSES = (
-    # Simplified static file serving.
-    # https://warehouse.python.org/project/whitenoise/
+    # Whitenoise for staticfiles (não funciona se não estiver aqui)
     'whitenoise.middleware.WhiteNoiseMiddleware',
-)
+
+]
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -168,9 +165,11 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-django_heroku.settings(locals())
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     # BASE_DIR / "static",
     os.path.join(BASE_DIR, 'static'),
+    # os.path.join(BASE_DIR, 'staticfiles'),
 ]
+django_heroku.settings(locals())

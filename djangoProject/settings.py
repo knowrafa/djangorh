@@ -122,17 +122,20 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+DATABASES= {'default': dj_database_url.config()}
+
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "dedle3g4aq1jvo",
-        'USER': 'cjftayirafarrk',
-        'PASSWORD': 'ed157b91833abec57e084a0d656f0d2ed862c250d1b4e81b4adc2da9fc5e9c52',
-        'HOST': 'ec2-50-19-32-202.compute-1.amazonaws.com',
-        'PORT': '5432',
+        # 'NAME': "dedle3g4aq1jvo",
+        # 'USER': 'cjftayirafarrk',
+        # 'PASSWORD': 'ed157b91833abec57e084a0d656f0d2ed862c250d1b4e81b4adc2da9fc5e9c52',
+        # 'HOST': 'ec2-50-19-32-202.compute-1.amazonaws.com',
+        # 'PORT': '5432',
     }
 }
-
+'''
 
 # DATABASES['default'] = dj_database_url.config()
 

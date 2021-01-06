@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import django_heroku
 import whitenoise
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -124,13 +125,16 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': "postgres",
-        # 'USER': 'postgres',
-        # 'PASSWORD': '123',
-        # 'HOST': '127.0.0.1'
-        #'PORT': '5432',
+        'NAME': "dedle3g4aq1jvo",
+        'USER': 'cjftayirafarrk',
+        'PASSWORD': 'ed157b91833abec57e084a0d656f0d2ed862c250d1b4e81b4adc2da9fc5e9c52',
+        'HOST': 'ec2-50-19-32-202.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
+
+
+# DATABASES['default'] = dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

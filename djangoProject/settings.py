@@ -33,7 +33,6 @@ ALLOWED_HOSTS = [
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Application definition
 
@@ -54,6 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -62,9 +62,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # Whitenoise for staticfiles (não funciona se não estiver aqui)
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
+
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -86,7 +89,10 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-REST_USE_JWT = True
+
+django_heroku.settings(locals())
+
+# REST_USE_JWT = True
 
 ROOT_URLCONF = 'djangoProject.urls'
 
@@ -145,7 +151,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # URL of the login page.
-LOGIN_URL = '/login/'
+LOGIN_URL = '/login/'     # this should coinside with url pattern of login view
+LOGOUT_URL = '/logout/'   # same but for logout view
+LOGIN_REDIRECT_URL = '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -172,4 +180,3 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     # os.path.join(BASE_DIR, 'staticfiles'),
 ]
-django_heroku.settings(locals())

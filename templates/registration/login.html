@@ -1,28 +1,37 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 {% comment %}
- Main page to authenticate users.
+Main page to authenticate users.
 {% endcomment %}
-{% load staticfiles %}
-{% block head %}
+{% load static %}
 
- <title>Django Consultants | Login</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel = "stylesheet" href="{% static "/css/login/login.css" %}">
-{% endblock %}
-{% block body %}
-    <header>
-        <h1></h1>
-        <h2>Página de Login</h2>
-    </header>
-<section>
-    <div class="sidenav">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Django Consultants | Login</title>
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+      id="bootstrap-css">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="{% static "css/login/login.css" %}">
+</head>
+
+<body>
+   <header>
+      <h1></h1>
+      <h2>Página de Login</h2>
+   </header>
+   <section>
+      <div class="sidenav">
          <div class="login-main-text">
-             <h2><h3><img src="{% static "main_page/images/ha-vagas.png" %}" class="img-responsive"></h3> <br style="text-align: center;"> Página de login</h2>
+            <h2>
+               <h3><img src="{% static "main_page/images/ha-vagas.png" %}" class="img-responsive"></h3> <br
+                  style="text-align: center;"> Página de login
+            </h2>
             <p>Efetue o login, ou cadastre-se.</p>
-             <p>Se você deseja apenas visualizar as vagas, acesse <a href="/vagas/">aqui</a> </p>
+            <p>Se você deseja apenas visualizar as vagas, acesse <a href="/vagas/">aqui</a> </p>
          </div>
-    </div>
+      </div>
 
       <div class="main">
          <div class="col-md-5 col-sm-12">
@@ -31,34 +40,37 @@
                <form method="post" action="." class="form-group">
                   {% csrf_token %}
                   <div class="form-group">
-                      <label for="id_username">Usuário:</label>
-                      {{ username }}
-                      <input type="text" name="username" class="form-control" placeholder="Digite o usuário">
+                     <label for="id_username">Usuário:</label>
+                     {{ username }}
+                     <input type="text" name="username" class="form-control" placeholder="Digite o usuário">
                   </div>
                   <div class="form-group">
-                    <label for="id_password">Senha:</label>
-                    {{ password }}
+                     <label for="id_password">Senha:</label>
+                     {{ password }}
                      <input type="password" name="password" class="form-control" placeholder="Digite a senha">
                   </div>
                   <button type="submit" class="btn btn-black">Login</button>
-                  <a style="color: white;" href="/cadastro/"><button type="button" onclick="href='/cadastro/'" class="btn btn-secondary" action="/cadastro/">Cadastre-se</button></a>
+                  <a style="color: white;" href="/cadastro/"><button type="button" onclick="href='/cadastro/'"
+                        class="btn btn-secondary" action="/cadastro/">Cadastre-se</button></a>
                   <p></p>
                   {% if form.errors %}
-                        <div class="alert alert-danger" role="alert" id = "errorAlert" onclick="style.display='none'">
-                           Dados inválidos! <strong>Verifique as credenciais e tente novamente</strong>
-                           <p>clique para fechar a mensagem</p>
+                  <div class="alert alert-danger" role="alert" id="errorAlert" onclick="style.display='none'">
+                     Dados inválidos! <strong>Verifique as credenciais e tente novamente</strong>
+                     <p>clique para fechar a mensagem</p>
 
-                        </div>
-                   {% endif %}
+                  </div>
+                  {% endif %}
 
                   {% if next %}
-                    <input type="hidden" name="next" value="{{ next }}" />
+                  <input type="hidden" name="next" value="{{ next }}" />
                   {% else %}
-                    <input type="hidden" name="next" value="/home/" />
+                  <input type="hidden" name="next" value="/home/" />
                   {% endif %}
                </form>
             </div>
          </div>
       </div>
-</section>
-{% endblock %}
+   </section>
+</body>
+
+</html>

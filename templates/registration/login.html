@@ -51,13 +51,12 @@ Main page to authenticate users.
                   </div>
                   <button type="submit" class="btn btn-black">Login</button>
                   <a style="color: white;" href="/cadastro/"><button type="button" onclick="href='/cadastro/'"
-                        class="btn btn-secondary" action="/cadastro/">Cadastre-se</button></a>
+                        class="btn btn-secondary">Cadastre-se</button></a>
                   <p></p>
                   {% if form.errors %}
                   <div class="alert alert-danger" role="alert" id="errorAlert" onclick="style.display='none'">
                      Dados inválidos! <strong>Verifique as credenciais e tente novamente</strong>
                      <p>clique para fechar a mensagem</p>
-
                   </div>
                   {% endif %}
 

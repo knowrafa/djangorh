@@ -6,6 +6,13 @@ from rest_framework_api_key.models import APIKey
 
 # Create your models here.
 
+class SampleModel(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 class Usuario(AbstractUser):
     chave = models.CharField(max_length=100, blank=True)
     chave_api = models.OneToOneField(APIKey, on_delete=models.DO_NOTHING, null=True)

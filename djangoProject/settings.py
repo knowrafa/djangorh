@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import django_heroku
 import whitenoise
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -127,10 +128,13 @@ DATABASES = {
         # 'NAME': "postgres",
         # 'USER': 'postgres',
         # 'PASSWORD': '123',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '5432',
+        # 'HOST': '127.0.0.1'
+        #'PORT': '5432',
     }
 }
+
+
+DATABASES['default'] = dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
